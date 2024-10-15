@@ -3,6 +3,8 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user/user.component';
 import { TasksComponent } from "./tasks/tasks.component";
+import { IUser } from './models/IUser';
+import { Users } from './models/users';
 
 @Component({
   selector: 'app-root',
@@ -12,5 +14,15 @@ import { TasksComponent } from "./tasks/tasks.component";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'task-app';
+  
+  users:IUser[]=Users;
+  selectedUserId?: string;
+
+  get selectedUser() {
+    return this.users.find((user) => user.id === this.selectedUserId);
+  }
+
+  onSelectUser(id: string) {
+    this.selectedUserId = id;
+  }
 }
