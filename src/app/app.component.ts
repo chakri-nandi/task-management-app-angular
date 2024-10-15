@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user/user.component';
@@ -11,18 +11,18 @@ import { Users } from './models/users';
   standalone: true,
   imports: [RouterOutlet, HeaderComponent, UserComponent, TasksComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  
-  users:IUser[]=Users;
+  users: IUser[] = Users;
   selectedUserId?: string;
 
-  get selectedUser() {
-    return this.users.find((user) => user.id === this.selectedUserId);
+  get selectedUser(): IUser | undefined {
+    return this.users.find(user => user.id === this.selectedUserId);
   }
 
-  onSelectUser(id: string) {
+  onSelectUser(id: string): void {
     this.selectedUserId = id;
   }
 }

@@ -1,8 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
-import { TaskComponent } from "./task/task.component";
+import { TaskComponent } from './task/task.component';
 import { ITask } from '../models/ITask';
-import { Tasks } from '../models/tasks';
-import { NewTaskComponent } from "./new-task/new-task.component";
+import { NewTaskComponent } from './new-task/new-task.component';
 import { TaskService } from './task.service';
 
 @Component({
@@ -10,26 +9,24 @@ import { TaskService } from './task.service';
   standalone: true,
   imports: [TaskComponent, NewTaskComponent],
   templateUrl: './tasks.component.html',
-  styleUrl: './tasks.component.css'
+  styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent {
-  private taskService= inject(TaskService);
-  
-  @Input({required: true}) name!: string;
-  @Input({required: true}) userId!: string;
+  private readonly taskService = inject(TaskService);
+
+  @Input({ required: true }) name!: string;
+  @Input({ required: true }) userId!: string;
   isAddingTask = false;
 
-
-  get selectedUserTasks() {
+  get selectedUserTasks(): ITask[] {
     return this.taskService.getUserTasks(this.userId);
   }
 
-  onStartAddTask() {
+  onStartAddTask(): void {
     this.isAddingTask = true;
   }
 
-  onCloseAddTask() {
+  onCloseAddTask(): void {
     this.isAddingTask = false;
   }
-
 }

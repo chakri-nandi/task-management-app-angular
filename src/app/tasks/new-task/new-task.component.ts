@@ -7,11 +7,11 @@ import { TaskService } from '../task.service';
   standalone: true,
   imports: [FormsModule],
   templateUrl: './new-task.component.html',
-  styleUrl: './new-task.component.css'
+  styleUrls: ['./new-task.component.css']
 })
 export class NewTaskComponent {
-  private tasksService = inject(TaskService);
-  
+  private readonly tasksService = inject(TaskService);
+
   @Input({ required: true }) userId!: string;
   @Output() close = new EventEmitter<void>();
 
@@ -19,12 +19,11 @@ export class NewTaskComponent {
   enteredSummary = '';
   enteredDate = '';
 
-
-  onCancel() {
+  onCancel(): void {
     this.close.emit();
   }
 
-  onSubmit() {
+  onSubmit(): void {
     this.tasksService.addTask(
       {
         title: this.enteredTitle,

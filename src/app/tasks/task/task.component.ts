@@ -7,16 +7,16 @@ import { TaskService } from '../task.service';
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [CardComponent,CommonModule],
+  imports: [CardComponent, CommonModule],
   templateUrl: './task.component.html',
-  styleUrl: './task.component.css'
+  styleUrls: ['./task.component.css']
 })
 export class TaskComponent {
-  private taskService = inject(TaskService);
+  private readonly taskService = inject(TaskService);
 
-  @Input({required: true}) task!: ITask;
+  @Input({ required: true }) task!: ITask;
 
-  onCompleteTask() {
+  onCompleteTask(): void {
     this.taskService.removeTask(this.task.id);
   }
 }
